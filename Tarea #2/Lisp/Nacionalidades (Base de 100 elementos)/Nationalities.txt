@@ -1,0 +1,63 @@
+"Funciones:"
+"(add-nationality)  Para agregar"
+"(dump-db) Para mostrar la base de datos"
+"(update (where :Nationality "Ejemplo") :Nationality "Ejemplo2) Para actualizar un dato"
+"(delete-nationality (where :Nationality "Ejemplo")) Para remover"
+" (save-db "c:\\Users\\raulc\\Desktop\\Nationalities.db") Para guardar"
+" (load-db "c:\\Users\\raulc\\Desktop\\Nationalities.db") Para cargar"
+
+
+(defun make-nationality (nationality)
+(list :Nationality nationality))
+
+(defvar *db* nil)
+
+(defun add-nation (nation) (push nation *db*))
+
+(defun dump-db ()
+(dolist (nation *db*)
+(format t "~{~a:~10t~a~%~}~%" nation)))
+
+(defun prompt-read (prompt)
+(format *query-io* "~a: " prompt)
+(force-output *query-io*)
+(read-line *query-io*))
+
+(defun prompt-for-nation ()
+(make-nationality
+(prompt-read "Nationality")))
+
+(defun add-nationality ()
+(loop (add-nation (prompt-for-nation))
+(if (not (y-or-n-p "Another? [y/n]: ")) (return))))
+
+(defun save-db (filename) 
+(with-open-file (out filename
+:direction :output
+:if-exists :supersede)
+(with-standard-io-syntax
+(print *db* out))))
+
+(defun load-db (filename) 
+(with-open-file (in filename)
+(with-standard-io-syntax
+(setf *db* (read in)))))
+
+(defun select (selector-fn) 
+(remove-if-not selector-fn *db*))
+
+(defun where (&key nationality)
+#'(lambda (nation)
+(and
+(if nationality (equal (getf nation :Nationality) nationality) t))))
+
+(defun update (selector-fn &key nationality)
+(setf *db*
+(mapcar
+#'(lambda (row)
+(when (funcall selector-fn row)
+(if nationality (setf (getf row :Nationality) nationality)))
+row) *db*)))
+
+(defun delete-nationality (selector-fn)
+(setf *db* (remove-if selector-fn *db*)))

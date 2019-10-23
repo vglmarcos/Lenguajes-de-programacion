@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Temperaturas</title>
+</head>
+<body>
+
+	<h1>Conversor de Temperaturas</h1>
+	<p>Seleccione su <b>escala</b> e ingrese su <b>temperatura: </b></p>
+	<form  method="post" onsubmit="alert(Temperaturas());">
+		<select id="Escala1">
+			<option value="1">Celsius</option>
+			<option value="2">Fahrenheit</option>
+			<option value="3">Kelvin</option>
+			<option value="4">Rankine</option>
+		</select>
+		<input type="text" id="Temp">
+	</form>
+	<p id="Nueva">Pulse siguiente para seleccionar su <b>nueva temperatura: </b></p>
+	<button onclick="Lista()">Siguiente</button>
+	<br>
+	<form method="post">
+		<br>
+		<select id="Escala2"></select>
+	</form>
+	<p>Pulse convertir para obtener su resultado</p>
+	<button onclick="alert(Temperaturas());">Convertir</button>
+	<p id="Val"></p>
+
+		
+<script src="Temperaturas.js" type="text/javascript" charset=utf-8></script>
+
+</body>
+</html>

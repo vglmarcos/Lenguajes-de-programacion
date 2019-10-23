@@ -1,0 +1,10 @@
+CL-USER 1 > (setq array1 (make-array 6 :element-type 'integer 
+:initial-contents '(1.1 1.2 1.12 3.3 5.5 7.7)))
+#(1.1 1.2 1.12 3.3 5.5 7.7)
+
+CL-USER 2 > (setq array2 (make-array 6 :element-type 'integer 
+:initial-contents '(1.1 1.2 1.12 3.3 5.5 7.7)))
+#(1.1 1.2 1.12 3.3 5.5 7.7)
+
+CL-USER 3 > (equalp array1 array2)
+T

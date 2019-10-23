@@ -1,0 +1,75 @@
+(defun crear-elementos (nombre  numero_atomico simbolo densidad descubierto_en)
+(list :Nombre nombre :Numero_atomico numero_atomico :Simbolo simbolo :Densidad densidad :Descubierto_en descubierto_en))
+
+(defvar *db* nil)
+
+(defun agregar-elemento (elemento) (push elemento *db*))
+
+(defun formato ()
+(dolist (elemento *db*)
+(format t "~{~a:~10t~a~%~}~%" elemento)))
+
+(defun prompt-read (prompt)
+(format *query-io* "~a: " prompt)
+(force-output *query-io*)
+(read-line *query-io*))
+
+(defun prompt-for-element ()
+(crear-elementos
+(prompt-read "Nombre")
+(or (parse-integer (prompt-read "Numero_atomico") :junk-allowed t) 0)
+(prompt-read "Simbolo")
+(prompt-read "Densidad")
+(or (parse-integer (prompt-read "Descubierto_en") :junk-allowed t) 0)))
+
+(defun agregar-elementos ()
+(loop (agregar-elemento (prompt-for-element))
+(if (not (y-or-n-p "Desea agregar otro? [y/n]: ")) (return))))
+
+(defun guardar-db (filename)
+(with-open-file (out filename
+:direction :output
+:if-exists :supersede)
+(with-standard-io-syntax
+(print *db* out))))
+
+(guardar-db "~/my-elements.db")
+
+(defun cargar-db (filename)
+(with-open-file (in filename)
+(with-standard-io-syntax
+(setf *db* (read in)))))
+
+(cargar-db "~/my-elements.db")
+
+(defun seleccionar (selector-fn) 
+(remove-if-not selector-fn *db*))
+
+(defun donde (&key nombre numero_atomico simbolo densidad descubierto_en)
+#'(lambda (elemento)
+(and
+(if nombre (equal (getf elemento :Nombre) nombre) t)
+(if numero_atomico (equal (getf elemento :Numero_atomico) numero_atomico) t)
+(if simbolo (equal (getf elemento :Simbolo) simbolo) t)
+(if densidad (equal (getf elemento :Densidad) densidad) t)
+(if descubierto_en (equal (getf elemento :Descubierto_en) descubierto_en) t))))
+
+(seleccionar (donde :Nombre "Hydrogen"))
+
+(defun actualizar (selector-fn &key nombre numero_atomico simbolo densidad descubierto_en)
+(setf *db*
+(mapcar
+#'(lambda (row)
+(when (funcall selector-fn row)
+(if nombre (setf (getf row :Nombre) nombre))
+(if numero_atomico (setf (getf row :Numero_atomico) numero_atomico))
+(if simbolo (setf (getf row :Simbolo) simbolo))
+(if densidad (setf (getf row :Densidad) densidad))
+(if descubierto_en (setf (getf row :Descubierto_en) descubierto_en)))
+row) *db*)))
+
+(defun eliminar-elemento (selector-fn)
+(setf *db* (remove-if selector-fn *db*)))
+
+abrir y compilar el archivo "tarea 1" en lisp
+cargar base de datos

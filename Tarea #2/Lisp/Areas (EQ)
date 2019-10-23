@@ -1,0 +1,26 @@
+(defun Areas()
+(terpri)
+(princ "1- Cuadrado   2-Circulo")
+(terpri)
+(setq figura (read))
+(if(eq figura 1)
+(progn
+(princ "Introduzca el lado: ")
+(setq l (read))
+(terpri)
+(setq r (* l l))
+(princ "El area del cuadrado es: " )
+(write r)
+)
+"Debe introducir el numero de la opcion"
+)
+(if(eq figura 2)
+(progn
+(princ "Introduzca el radio: ")
+(setq radio (read))
+(terpri)
+(princ "El area del circulo es: ")
+(write (* 3.14 radio radio)))
+"Debe introducir el numero de la opcion"
+)
+)

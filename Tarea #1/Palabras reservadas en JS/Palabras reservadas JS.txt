@@ -1,0 +1,137 @@
+Finally: 
+Contiene intrucciones para ejecutarse despues de "try" y "catch".
+
+"Try" es un bloque que contiene instrucciones, seguido de un "Catch" que contiene instrucciones que se realizan
+cuando el bloque "Try" arroja una excepcion.
+
+Una clausula "Finally"se ejecuta despues del bloque "Try" y "Catch".
+Finally se ejecuta independientemente de si ha ocurrido una excepcion en el bloque "Try".
+
+Ejemplo: 
+
+El siguiente ejemplo abre un archivo y despues ejecuta instrucciones que usan el archivo (JavaScript del lado del servidor permite acceder a archivos). Si una excepción es lanzada mientras el archivo está abierto, la cláusula finally cierra el archivo antes de que el script falle.
+
+openMyFile()
+try {
+   // retiene un recurso
+   writeMyFile(theData);  //Abre el archivo y ejecuta las instrucciones
+}
+finally {
+   closeMyFile(); // Siempre cierra el recurso antes de que el script falle, por si una excepcion es lanzada.
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+For
+La siguiente sentencia for comienza mediante la declaración de la variable i y se inicializa a 0. Comprueba que i es menor que un limite previamente establecido, en este caso 9, realiza las dos sentencias (vueltas) con éxito e incrementa i en 1 después de cada pase del bucle.
+
+for (var i = 0; i < 9; i++) {
+   n += i;
+   mifuncion(n);
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Function
+
+Declara una función con los parámetros especificados.
+
+El siguiente código declara una función que devuelve la cantidad total de ventas, cuando se da el número de unidades vendidas de productos a, b, y c.
+
+//unidades vendidas
+A=2;
+B=20;
+C=89;
+calcular_ventas(A,B,C);
+function calcular_ventas(unidades_a, unidades_b, unidades_c) {
+   return unidades_a*79 + unidades_b * 129 + unidades_c * 699;
+}
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Float
+Float ya no es una palabra reservada para la actual ECMAScript(4-5) o la nueva version entrante (6).
+
+var float = "definitivamente no es un flotante";
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+False
+Muy a menudo programando nos encontramos con la necesidad de tener un tipo de dato que pueda tener solo
+dos valores, tales como:
+Si/No  (YES/NO)
+Prendido/Apagado (ON/OFF)
+Verdadero/Falso (TRUE/FALSE)
+Estos son tipos de datos booleanos
+La palabra reservada False es uno de estos tipos de datos.
+Un tipo de dato booleano como es false es lanzado cuando se trata de averiguar si una expresion es verdadera. Se puede almacenar en una variable para su uso posterior.
+
+Ejemplo:
+
+var false= "Definitivamente no es falso";
+
+10<9   //returns false
+
+El valor booleano de 0 tambien da como resultado false:
+
+var x = 0;
+Boolean(x);                //returns false
+
+El valor booleano de -0 tambien es falso(false):
+
+var x= -0;
+Boolean(x); // returns false
+
+El valor booleano de un string vacio, tambien es falso(false):
+
+var x= "";
+Booleand(x);  //returns false
+
+Un valor indefinidp (undefined), tambien es falso (false):
+
+var x;
+Boolean(x);
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Final
+El modificador "Final" es usado para declarar variables que siempre retienen el mismo valor.
+Una vez declarada la variable con Final, no puede ser modificada despues, y no se puede agregar, remover ni modificar propiedades
+Ejemplo:
+
+final int x = 100;
+x = 102; // error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
